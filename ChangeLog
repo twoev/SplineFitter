@@ -1,0 +1,18 @@
+05-10-2018  James Monk  <jwmonk@protonmail.com>
+  * Move to github
+
+04-28-2013  James Monk  <jmonk@cern.ch>
+  * Fitting example works on TGraphs as well as TH1
+  * Spline can be defined from coefficients as well as fitted
+
+01-11-2012  James Monk  <jmonk@cern.ch>
+  * Fix make dist for missing TCLAP headers
+
+31-10-2012  James Monk  <jmonk@cern.ch>
+  * Tweak BSpline::controlPoints to vary the matrix inversion failure threshold with the number of coefficients
+  * Add switch to the example main program to turn off control point fitting
+  * Initial check in to ATLAS svn
+
+
+10-10-2012  James Monk <jmonk@cern.ch>
+  * Creation of B spline fitting package

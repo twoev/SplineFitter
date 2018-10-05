@@ -1,0 +1,42 @@
+#AC_SEARCH_ROOT(actionIfFound, actionIfNotFound)
+AC_DEFUN([AC_SEARCH_ROOT], [
+ROOTSEARCHPATH=$PATH
+if test -n "$ROOTSYS"; then
+  AC_MSG_NOTICE([Testing ROOTSYS=$ROOTSYS for root-config])
+  ROOTSEARCHPATH=$ROOTSYS/bin
+  
+  AC_PATH_PROG(ROOTCONFIG, [root-config], [no], [$ROOTSEARCHPATH])
+  
+else
+  ROOTCONFIG=no
+fi
+
+if test x$ROOTCONFIG != xno; then
+  AC_MSG_NOTICE([Found root-config in $ROOTSYS/bin])
+else
+  ROOTSEARCHPATH=$PATH
+  AC_PATH_PROG(ROOTCONFIG, [root-config], [no], [$ROOTSEARCHPATH])
+fi
+
+
+if test x$ROOTCONFIG != xno; then
+  AC_MSG_NOTICE([Using root-config to get ROOT paths])
+  ROOTCPPFLAGS="`$ROOTCONFIG --cflags`"
+  ROOTLIBS="`$ROOTCONFIG --libs` -lTreePlayer"
+  ROOTLDFLAGS="`$ROOTCONFIG --ldflags`"
+  ROOTBINDIR="`$ROOTCONFIG --bindir`"
+  AC_SUBST([ROOTCPPFLAGS])
+  AC_SUBST([ROOTLIBS])
+  AC_SUBST([ROOTLDFLAGS])
+  AC_SUBST([ROOTBINDIR])
+  AC_MSG_NOTICE([ROOTCPPFLAGS=$ROOTCPPFLAGS])
+  AC_MSG_NOTICE([ROOTLIBS=$ROOTLIBS])
+  AC_MSG_NOTICE([ROOTLDFLAGS=$ROOTLDFLAGS])
+  AC_MSG_NOTICE([ROOTBINDIR=$ROOTBINDIR])
+  $1
+else
+  $2
+fi
+])
+
+

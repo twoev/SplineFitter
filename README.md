@@ -1,3 +1,5 @@
+#SplineFitter
+
 To build you need to do
 
 ./configure --prefix=/path/to/install <other options>
